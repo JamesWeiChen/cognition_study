@@ -1,0 +1,89 @@
+
+{{ block content }}
+
+    <p>
+        感謝您參與實驗。最後我們想請您回答以下問題。所有個人資訊僅用於研究分析，並將嚴格保密處理。請您放心填寫。
+    </p>
+
+    {{ formfields }}
+
+    {{ next_button }}
+
+<script>
+    document.addEventListener("DOMContentLoaded",function() {
+        let otherFieldContainer = document.querySelector('input[name="政治傾向_其他"]').closest('.mb-3');
+        if (!otherFieldContainer) {
+            otherFieldContainer = document.querySelector('input[name="政治傾向_其他"]').parentElement;
+        }
+        otherFieldContainer.style.display = 'none';
+
+        let gradeContainer = document.querySelector('input[name="年級"]').closest('.mb-3');
+        if (!gradeContainer) gradeContainer = document.querySelector('input[name="年級"]').parentElement;
+        gradeContainer.style.display = 'none';
+
+        let collegeContainer = document.querySelector('input[name="學院"]').closest('.mb-3');
+        if (!collegeContainer) collegeContainer = document.querySelector('input[name="學院"]').parentElement;
+        collegeContainer.style.display = 'none';
+
+        let deptContainer = document.querySelector('input[name="科系"]').closest('.mb-3');
+        if (!deptContainer) deptContainer = document.querySelector('input[name="科系"]').parentElement;
+        deptContainer.style.display = 'none';
+
+        let radiosOther = document.querySelectorAll('input[name="政治傾向"]');
+        radiosOther.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.value === '其他') {
+                    otherFieldContainer.style.display = 'block';
+                } else {
+                    otherFieldContainer.style.display = 'none';
+                    document.querySelector('input[name="政治傾向_其他"]').value = '';
+                }
+            });
+        });
+
+        let radiosStudent = document.querySelectorAll('input[name="是否為學生"]');
+        radiosStudent.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.value === '是') {
+                    gradeContainer.style.display = 'block';
+                    collegeContainer.style.display = 'block';
+                    deptContainer.style.display = 'block';
+                } else {
+                    gradeContainer.style.display = 'none';
+                    collegeContainer.style.display = 'none';
+                    deptContainer.style.display = 'none';
+                    
+                    let gradeInputs = document.querySelectorAll('input[name="年級"]');
+                    gradeInputs.forEach(i => i.checked = false);
+                    document.querySelector('input[name="學院"]').value = '';
+                    document.querySelector('input[name="科系"]').value = '';
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;
+    color: #333333 !important;
+}
+
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+
+{{ endblock }}

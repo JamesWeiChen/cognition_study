@@ -1,0 +1,39 @@
+{{ block title }}
+測驗結果與報酬結算
+{{ endblock }}
+
+{{ block content }}
+<div style="padding: 20px; margin-bottom: 20px; line-height: 1.8; color: #000000; text-align: center;">
+    
+    <h3 style="font-weight: bold; margin-bottom: 25px;">測驗結果</h3>
+    
+    <p style="font-size: 1.25rem;">
+        在剛才的小測驗中，您總共答對了 <strong>{{ 答對題數 }}</strong> 題，共獲得 <strong>{{ 額外獎金 }}</strong> 法幣。
+    </p>
+     
+    <p style="font-size: 1.25rem;">
+        除基本參與費 150 元之外，您將額外獲得獎金 <strong>{{ 額外獎金 }}</strong> 元。
+    </p>
+
+    <hr style="border-top: 1px solid #000000; margin: 25px 0;">
+    
+    <p style="font-size: 1.35rem; font-weight: bold;">
+        您的總參與報酬為：<span>{{ 總金額 }}</span> 元。
+    </p>
+
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <p style="margin-bottom: 15px;"></p>
+    <button class="otree-btn-next btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;">確認</button>
+</div>
+
+<style>
+    /* 強制確保字體為黑色，並維持好閱讀的字體大小 */
+    body { 
+        font-size: 1.15rem !important; 
+        color: #000000 !important; 
+        background-color: #ffffff !important;
+    }
+</style>
+{{ endblock }}

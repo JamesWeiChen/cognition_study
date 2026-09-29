@@ -1,0 +1,106 @@
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+    <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+    <p style="margin-bottom: 10px;">請回想剛剛兩位候選人的政見，以下哪組選項是候選人們承諾的囤房稅率？</p>
+    
+    <!-- JavaScript 動態生成的選項會放在這裡 -->
+    <div id="dynamic-quiz-options" style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+    </div>
+    
+    <p id="quiz-error-msg" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;"></p>
+</div>
+
+<br>
+<div style="text-align: center;">
+    <button type="button" class="btn btn-primary" onclick="checkQuizAndSubmit()">確認送出，進入下一頁</button>
+</div>
+
+<style>
+body { font-size: 1.15rem !important; line-height: 1.7 !important; color: #333333 !important; }
+.btn { font-size: 1.15rem !important; padding: 10px 20px !important; }
+h4, h5, label { line-height: 1.5 !important; margin-bottom: 10px !important; font-size: 1.15rem !important; }
+</style>
+
+<!-- 🌟 偷偷紀錄對錯的隱藏框框 (對應 __init__.py 裡的變數) -->
+<input type="hidden" name="囤房稅測驗結果" id="quiz_result_record">
+<!-- 🌟 新增：偷偷紀錄錯誤次數的隱藏框框 -->
+<input type="hidden" name="囤房稅錯誤次數" id="error_count_record" value="0">
+
+<script>
+    // 🌟 1. 抓取 Python 傳來的囤房稅率，並設定正確答案字串 (使用 parseFloat 支援小數點)
+    let rateA = parseFloat("{{ 候選人A_稅率 }}");
+    let rateB = parseFloat("{{ 候選人B_稅率 }}");
+    let correctOption = `候選人A: ${rateA}%，候選人B: ${rateB}%`;
+
+    // 🌟 2. 製作專屬囤房稅的干擾陷阱名單
+    let distractors = [
+        `候選人A: 10.5%，候選人B: 15.4%`,
+        `候選人A: 2.4%，候選人B: 3.8%`,
+        `候選人A: 3.8%，候選人B: 1.2%`,
+        `候選人A: 9.2%，候選人B: 13.8%`,
+        `候選人A: 4.8%，候選人B: 5.2%`
+    ];
+
+    // 🌟 直接過濾掉剛好跟正確答案一模一樣的陷阱
+    distractors = distractors.filter(d => d !== correctOption);
+
+    // 🌟 把陷阱打亂，然後抽出前 3 個
+    distractors.sort(() => 0.5 - Math.random());
+    let selectedOptions = [correctOption, distractors[0], distractors[1], distractors[2]];
+
+    // 🌟 3. 將最終的 4 個選項打亂順序，防止正確答案永遠在第一個
+    selectedOptions.sort(() => 0.5 - Math.random());
+
+    // 🌟 4. 把選項貼到畫面上
+    let container = document.getElementById('dynamic-quiz-options');
+    selectedOptions.forEach(opt => {
+        let label = document.createElement('label');
+        label.style.cursor = 'pointer';
+        label.style.padding = '5px 0';
+        label.innerHTML = `<input type="radio" name="quiz_pair" value="${opt}" style="transform: scale(1.2); margin-right: 8px;"> ${opt}`;
+        container.appendChild(label);
+    });
+
+    // 🌟 幫這題加一個鎖，用來記錄「是不是第一次送出」
+    let isScored = false;
+    // 🌟 新增：用來記錄錯誤次數的計數器
+    let errorCount = 0;
+
+    function checkQuizAndSubmit() {
+        let selected = document.querySelector('input[name="quiz_pair"]:checked');
+        let errorMsg = document.getElementById('quiz-error-msg');
+
+        // 防呆 1：如果不選，就不能進入下一頁
+        if (!selected) {
+            errorMsg.innerText = "請先選擇一個答案才能進入下一頁";
+            errorMsg.style.display = "block";
+            return;
+        }
+
+        // 🌟 核心魔法 1：只記錄「第一次」的成績！
+        if (!isScored) {
+            let isCorrect = (selected.value === correctOption) ? 1 : 0;
+            document.getElementById('quiz_result_record').value = isCorrect;
+            isScored = true; // 上鎖！之後就算重選也不會改變成績了
+        }
+
+        // 🌟 核心魔法 2：防呆 2！如果選錯了，擋下來不給換頁，強制重選！
+        if (selected.value !== correctOption) {
+            // 🌟 新增：答錯了！錯誤次數 +1，並寫入隱藏框框
+            errorCount++;
+            document.getElementById('error_count_record').value = errorCount;
+
+            errorMsg.innerText = "請仔細回想剛剛的政見內容";
+            errorMsg.style.display = "block";
+            return; // return 會直接中止動作，所以表單絕對不會送出
+        }
+
+        // 如果上面都沒擋下來，代表答對了！直接送出表單前往下一頁！
+        errorMsg.style.display = "none";
+        document.getElementById('form').submit();
+    }
+</script>
+{{ endblock }}

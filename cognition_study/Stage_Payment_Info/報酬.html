@@ -1,0 +1,24 @@
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+<div style="min-height: 50vh; text-align: left; padding: 40px 20px;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 40px; color: #000000;">實驗已結束</h1>
+    <p style="font-size: 1.8rem; line-height: 1.6; margin: 20px 0; color: #000000;">感謝您的參與，本實驗已全數執行完畢。</p>
+    <p style="font-size: 1.8rem; line-height: 1.6; margin: 20px 0; color: #000000;">請您先<span style="font-weight: bold; text-decoration: underline;">留在座位上</span>，靜候研究人員呼叫學號。</p>
+    <p style="font-size: 1.8rem; line-height: 1.6; margin: 20px 0; color: #000000;">經呼叫號碼的同學，請攜帶<span style="font-weight: bold; text-decoration: underline;">身分證</span>與隨身物品，前往前方領取報酬。</p>
+</div>
+
+<style>
+    /* 隱藏 oTree 預設的上方標題列與按鈕，讓版面保持全白純淨 */
+    .card-header {
+        display: none !important;
+    }
+    .otree-btn-next {
+        display: none !important;
+    }
+    body {
+        background-color: #ffffff !important;
+    }
+</style>
+{{ endblock }}

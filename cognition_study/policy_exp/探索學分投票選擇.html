@@ -12,20 +12,25 @@
         <img src="{% static 'candidate_a.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
         <br>
         <input type="radio" name="探索學分後續選擇" value="{{ 候選人A_學分 }}" required>
-        支持 候選人A<br>（主張探索學分上限為 {{ 候選人A_學分 }} 學分）
+        支持 候選人A<br>（主張探索學分上限: {{ 候選人A_學分 }} 學分）
     </label>
 
     <label style="cursor: pointer; text-align: center; padding: 10px; border: 1px solid transparent; border-radius: 5px; transition: 0.3s;">
         <img src="{% static 'candidate_b.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
         <br>
         <input type="radio" name="探索學分後續選擇" value="{{ 候選人B_學分 }}" required>
-        支持 候選人B<br>（主張探索學分上限為 {{ 候選人B_學分 }} 學分）
+        支持 候選人B<br>（主張探索學分上限: {{ 候選人B_學分 }} 學分）
     </label>
 
 </div>
 
 <div style="text-align: center; margin-top: 20px;">
     {{ formfield_errors '探索學分後續選擇' }}
+</div>
+<div style="margin-top: 40px; background-color: #f8f9fa; padding: 25px; border-radius: 8px;">
+    <label style="font-weight: bold; color: #333; display: block; margin-bottom: 10px;">您選擇這位候選人的理由：</label>
+    {{ form.選擇理由2 }}
+    {{ formfield_errors '選擇理由2' }}
 </div>
 
 <br><br>

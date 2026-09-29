@@ -3,6 +3,7 @@
 {{ endblock }}
 
 {{ block content }}
+<p>*本段實驗文本將與小測驗相關</p>
 <p>以下是兩位候選人的核心政見。請仔細比較他們主張的都更同意門檻差異：</p>
 
 <div style="display: flex; justify-content: space-between; gap: 20px;">
@@ -29,40 +30,24 @@
 
 <br><br>
 <div style="text-align: center;">
-    <button class="otree-btn-next btn btn-primary">我已經了解他們的政見，準備投票</button>
+    <button class="otree-btn-next btn btn-primary">我已經了解他們的政見，準備前往測驗</button>
 </div>
 
 <style>
-body {
-    font-size: 1.15rem !important; 
-    line-height: 1.7 !important;   
-    color: #333333 !important;     
-}
-
-.btn {
-    font-size: 1.15rem !important;
-    padding: 10px 20px !important; 
-}
-
-input, select, textarea {
-    font-size: 1.1rem !important;
-}
-
-h4, h5, label {
-    line-height: 1.5 !important;
-    margin-bottom: 10px !important;
-    font-size: 1.15rem !important;
-}
+body { font-size: 1.15rem !important; line-height: 1.7 !important; color: #333333 !important; }
+.btn { font-size: 1.15rem !important; padding: 10px 20px !important; }
+h4, h5, label { line-height: 1.5 !important; margin-bottom: 10px !important; font-size: 1.15rem !important; }
 </style>
+
+<!-- 🌟 計時小抄的隱藏框框 -->
 <input type="hidden" name="看政見時間" id="page_timer">
 
 <script>
-    let startTime = Date.now(); // 網頁一打開就按下碼表
-
+    let startTime = Date.now(); 
     document.getElementById('form').addEventListener('submit', function() {
-        let endTime = Date.now(); // 按下下一頁的瞬間
-        let timeSpent = (endTime - startTime) / 1000; // 算出花了幾秒
-        document.getElementById('page_timer').value = timeSpent; // 填入隱藏框框
+        let endTime = Date.now(); 
+        let timeSpent = (endTime - startTime) / 1000; 
+        document.getElementById('page_timer').value = timeSpent; 
     });
 </script>
 {{ endblock }}

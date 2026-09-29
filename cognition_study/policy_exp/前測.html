@@ -5,9 +5,13 @@
 
 <h3 id="dynamic-title" style="color: #000000; text-align: left; margin-bottom: 30px; font-weight: bold;"></h3>
 
+<!-- ==============================================
+    1. 囤房稅區塊
+=============================================== -->
 <div id="container-house-intro" class="step-container step-intro" style="display: none;">
     <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
         <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">囤房稅的初衷與爭議</h4>
+        <p>*本段實驗文本將與小測驗相關</p>
         <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，針對「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
         <p>政策重點與正反意見：</p>
         <ul>
@@ -25,7 +29,7 @@
             <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="3.8"> 3.8%</label>
             <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="5.2"> 5.2%</label>
         </div>
-        <p id="quiz-error-house" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+        <p id="quiz-error-house" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細閱讀文章敘述</p>
     </div>
     <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
     <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('house')">下一頁</button>
@@ -34,7 +38,7 @@
 <div id="container-house-survey" class="step-container step-survey" style="display: none;">
     <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
         <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">囤房稅的初衷與爭議</h4>
-        <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，針對「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
+        <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，针对「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
         <p>政策重點與正反意見：</p>
         <ul>
             <li><strong>作法：</strong>針對持有四戶以上非自住房屋者制定「差別稅率」，持有的房子越多，稅率就越高。</li>
@@ -50,19 +54,42 @@
             <span style="margin-left: 10px; font-weight: 500;">%</span>
         </div>
         {{ formfield_errors '初始囤房稅' }}
-        
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持在現行制度下再調漲全國囤房稅？</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始囤房稅態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常反對</span>
+                <span>非常支持</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始囤房稅態度 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始囤房稅態度' }}
     </div>
+    
     <div style="margin-bottom: 50px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意囤房稅議題？</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始囤房稅重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常不在意</span>
+                <span>非常在意</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始囤房稅重要性 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始囤房稅重要性' }}
     </div>
@@ -72,9 +99,13 @@
     </div>
 </div>
 
+<!-- ==============================================
+    2. 都更/景觀法區塊
+=============================================== -->
 <div id="container-urban-intro" class="step-container step-intro" style="display: none;">
     <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
         <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">下修都更門檻的背景與爭議</h4>
+        <p>*本段實驗文本將與小測驗相關</p>
         <p>台灣老舊房屋眾多，為加速改善居住安全與市容，社會長期呼籲推動都市更新。然而，以台北市為例，由政府領導的公辦都更必須取得至少 <strong>90%</strong> 的居民同意才能執行，導致許多老屋都更案停滯不前。</p>
         <p>政策重點與正反意見：</p>
         <ul>
@@ -92,7 +123,7 @@
             <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="85"> 85%</label>
             <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="90"> 90%</label>
         </div>
-        <p id="quiz-error-urban" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+        <p id="quiz-error-urban" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細閱讀文章敘述</p>
     </div>
     <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
     <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('urban')">下一頁</button>
@@ -117,19 +148,42 @@
             <span style="margin-left: 10px; font-weight: 500;">%</span>
         </div>
         {{ formfield_errors '初始景觀同意門檻' }}
-        
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持降低房屋都更同意門檻?</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始景觀法態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常反對</span>
+                <span>非常支持</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始景觀法態度 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始景觀法態度' }}
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意都市更新議題？</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始景觀法重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常不在意</span>
+                <span>非常在意</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始景觀法重要性 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始景觀法重要性' }}
     </div>
@@ -139,9 +193,13 @@
     </div>
 </div>
 
+<!-- ==============================================
+    3. A+ 比例限制區塊
+=============================================== -->
 <div id="container-aplus-intro" class="step-container step-intro" style="display: none;">
     <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
         <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">分數通膨與A+比例限制</h4>
+        <p>*本段實驗文本將與小測驗相關</p>
         <p>近年來大學分數通膨嚴重，成績單失去鑑別度。以台大為例，111 學年度平均 A+ 比例約為 <strong>31%</strong>。為恢復成績的客觀性，台大與部分學校已開始研擬「限制 A+ 比例」政策。雖然台大目前尚未全面強制規定，但已有部分教師自行訂定嚴格的 A+ 名額配給。</p>
         <p>政策重點與爭議：</p>
         <ul>
@@ -159,7 +217,7 @@
             <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="31"> 31%</label>
             <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="45"> 45%</label>
         </div>
-        <p id="quiz-error-aplus" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+        <p id="quiz-error-aplus" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細閱讀文章敘述</p>
     </div>
     <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
     <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('aplus')">下一頁</button>
@@ -184,19 +242,42 @@
             <span style="margin-left: 10px; font-weight: 500;">%</span>
         </div>
         {{ formfield_errors '初始A加比例' }}
-        
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持制定更嚴格的A+標準?</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始A加限制態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常反對</span>
+                <span>非常支持</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始A加限制態度 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始A加限制態度' }}
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">3.  請問您有多在意A+標準議題？</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始A加限制重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常不在意</span>
+                <span>非常在意</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始A加限制重要性 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始A加限制重要性' }}
     </div>
@@ -206,9 +287,13 @@
     </div>
 </div>
 
+<!-- ==============================================
+    4. 探索學分區塊
+=============================================== -->
 <div id="container-credit-intro" class="step-container step-intro" style="display: none;">
     <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
         <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">探索學分制度與爭議</h4>
+        <p>*本段實驗文本將與小測驗相關</p>
         <p>為了鼓勵跨領域學習，台大推動探索學分制度。學生可將部分課程評分改為「通過／不通過」，及格即可取得學分且不計入 GPA。目前規範每學期最多可申請 <strong>6 學分</strong>，校方對是否提供更多探索學分仍在商議中。</p>
         <p>政策重點與正反意見：</p>
         <ul>
@@ -226,7 +311,7 @@
             <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="9"> 9 學分</label>
             <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="12"> 12 學分</label>
         </div>
-        <p id="quiz-error-credit" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+        <p id="quiz-error-credit" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細閱讀文章敘述</p>
     </div>
     <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
     <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('credit')">下一頁</button>
@@ -251,19 +336,42 @@
             <span style="margin-left: 10px; font-weight: 500;">學分</span>
         </div>
         {{ formfield_errors '初始探索學分' }}
-        
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持開放更多探索學分?</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始探索學分態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常反對</span>
+                <span>非常支持</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始探索學分態度 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始探索學分態度' }}
     </div>
+    
     <div style="margin-bottom: 30px;">
         <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意探索學分議題？</label>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始探索學分重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        <div class="rating-box">
+            <div class="rating-labels">
+                <span>非常不在意</span>
+                <span>非常在意</span>
+            </div>
+            <div class="rating-options-manual">
+                {% for choice in form.初始探索學分重要性 %}
+                    <label class="custom-radio-item">
+                        <span class="custom-radio-num">{{ choice.label }}</span>
+                        <div class="custom-radio-btn">{{ choice }}</div>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
         {{ formfield_errors '初始探索學分重要性' }}
     </div>
@@ -277,6 +385,20 @@
     <button type="button" class="btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="submitForm()">確認修改並送出</button>
 </div>
 
+<!-- 🌟 這是用來算錢的 4 個隱形記分板 -->
+<input type="hidden" name="前測囤房稅測驗結果" id="record_house">
+<input type="hidden" name="前測景觀法測驗結果" id="record_urban">
+<input type="hidden" name="前測A加測驗結果" id="record_aplus">
+<input type="hidden" name="前測探索學分測驗結果" id="record_credit">
+
+<!-- 🌟 這是我們新增的 4 個錯誤次數記分板 (預設為0) -->
+<input type="hidden" name="前測囤房稅錯誤次數" id="error_house" value="0">
+<input type="hidden" name="前測景觀法錯誤次數" id="error_urban" value="0">
+<input type="hidden" name="前測A加錯誤次數" id="error_aplus" value="0">
+<input type="hidden" name="前測探索學分錯誤次數" id="error_credit" value="0">
+
+<!-- 記得把這個接時間的隱藏框框補回來唷！ -->
+<input type="hidden" name="前測時間" id="page_timer">
 
 <script>
     let startTime = Date.now();
@@ -343,27 +465,66 @@
         window.scrollTo(0, 0);
     }
 
+    // 🌟 在這裡加上兩個鎖，一個記第一次分數，一個記錯誤次數
+    let isScored = {
+        'house': false,
+        'urban': false,
+        'aplus': false,
+        'credit': false
+    };
+    
+    let errorCounts = {
+        'house': 0,
+        'urban': 0,
+        'aplus': 0,
+        'credit': 0
+    };
+
     function verifyQuizAndNext(topic) {
         let selected = document.querySelector(`input[name="quiz_${topic}"]:checked`);
         let errorMsg = document.getElementById(`quiz-error-${topic}`);
         
         if (!selected) {
-            errorMsg.innerText = "請先回答小測驗才能進入下一頁唷！";
-            errorMsg.style.display = "block";
-        } else if (selected.value !== correctAnswers[topic]) {
-            errorMsg.innerText = "請再仔細看看上面的文章敘述唷！";
+            errorMsg.innerText = "請先回答小測驗";
             errorMsg.style.display = "block";
         } else {
-            errorMsg.style.display = "none";
-            currentStep = 'survey';
-            showCurrent();
+            // 🌟 魔法：受試者有選答案，且是「第一次」送出檢查時，記錄成績！
+            if (!isScored[topic]) {
+                let score = (selected.value === correctAnswers[topic]) ? 1 : 0;
+                
+                if (topic === 'house') document.getElementById('record_house').value = score;
+                if (topic === 'urban') document.getElementById('record_urban').value = score;
+                if (topic === 'aplus') document.getElementById('record_aplus').value = score;
+                if (topic === 'credit') document.getElementById('record_credit').value = score;
+                
+                isScored[topic] = true; // 鎖定這題，之後就算他改對了，也不會再加分！
+            }
+
+            if (selected.value !== correctAnswers[topic]) {
+                errorMsg.innerText = "請再仔細閱讀文章敘述";
+                errorMsg.style.display = "block";
+                
+                // 🌟 新增：答錯了！增加這題的錯誤次數，並寫入隱藏的框框裡
+                errorCounts[topic]++;
+                if (topic === 'house') document.getElementById('error_house').value = errorCounts[topic];
+                if (topic === 'urban') document.getElementById('error_urban').value = errorCounts[topic];
+                if (topic === 'aplus') document.getElementById('error_aplus').value = errorCounts[topic];
+                if (topic === 'credit') document.getElementById('error_credit').value = errorCounts[topic];
+                
+            } else {
+                errorMsg.style.display = "none";
+                currentStep = 'survey';
+                showCurrent();
+            }
         }
     }
 
+    // 🌟 終極升級版：加上每一題的專屬數值邏輯檢查！
     function validateCurrentSurvey() {
         let currentTopic = topicOrder[currentTopicIndex];
         let fields = requiredFields[currentTopic];
         let allFilled = true;
+        let valueErrorMsg = ""; // 專門用來裝填錯數值時的警告訊息
 
         for (let fieldName of fields) {
             let inputs = document.getElementsByName(fieldName);
@@ -376,16 +537,48 @@
                 }
                 if (!isChecked) allFilled = false;
             } else {
-                // 如果是填寫數字/文字的輸入框
-                if (inputs[0].value.trim() === '') allFilled = false;
+                // 如果是需要填寫數字的框框
+                let valStr = inputs[0].value.trim();
+                if (valStr === '') {
+                    allFilled = false;
+                } else {
+                    let val = Number(valStr);
+                    
+                    // 針對不同的變數，做嚴格的數值檢查
+                    if (fieldName === '初始囤房稅') {
+                        if (isNaN(val) || val < 0) {
+                            valueErrorMsg = "囤房稅率請填寫大於等於 0 的數字";
+                        }
+                    } else if (fieldName === '初始景觀同意門檻') {
+                        if (isNaN(val) || val < 0 || val > 100) {
+                            valueErrorMsg = "都更同意門檻請填寫 0 到 100 之間的數字";
+                        }
+                    } else if (fieldName === '初始A加比例') {
+                        if (isNaN(val) || val < 0 || val > 100) {
+                            valueErrorMsg = "A+ 比例上限請填寫 0 到 100 之間的數字";
+                        }
+                    } else if (fieldName === '初始探索學分') {
+                        // 探索學分不但要大於等於0，還必須是沒有小數點的「整數」！
+                        if (isNaN(val) || val < 0 || !Number.isInteger(val)) {
+                            valueErrorMsg = "探索學分請填寫大於等於 0 的整數";
+                        }
+                    }
+                }
             }
         }
 
         let errorMsgEl = document.getElementById(`survey-error-${currentTopic}`);
+        
+        // 檢查順序：先看有沒有漏填，再看數字合不合理
         if (!allFilled) {
-            errorMsgEl.innerText = "請完整填寫所有問題唷！";
+            errorMsgEl.innerText = "請完整填寫所有問題";
+            errorMsgEl.style.display = 'block';
+        } else if (valueErrorMsg !== "") {
+            // 如果觸發了數值錯誤，就顯示上面的專屬警告把受試者擋下來！
+            errorMsgEl.innerText = valueErrorMsg;
             errorMsgEl.style.display = 'block';
         } else {
+            // 全部過關，前往下一區塊！
             errorMsgEl.style.display = 'none';
             nextTopic(); 
         }
@@ -419,7 +612,7 @@
         if (hasErrors) {
             document.querySelectorAll('.step-intro').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.step-survey').forEach(el => el.style.display = 'block');
-            document.getElementById('dynamic-title').innerText = "⚠️ 發現未填寫的題目，請補齊後再送出";
+            document.getElementById('dynamic-title').innerText = "請補齊未填寫的題目後再送出";
             
             document.querySelectorAll('.survey-next-btn').forEach(el => el.style.display = 'none');
             document.getElementById('global-submit-container').style.display = 'block';
@@ -436,25 +629,7 @@
         margin-bottom: 10px !important;
         font-size: 1.15rem !important;
     }
-
-    .form-check-inline {
-        display: inline-flex !important;
-        flex-direction: column-reverse !important;
-        align-items: center !important;
-        gap: 8px !important;
-        margin: 0 6px !important;
-    }
-    .form-check-label {
-        font-weight: 500;
-        color: #666 !important;
-        margin-left: 0 !important;
-        cursor: pointer;
-    }
-    .form-check-input {
-        margin: 0 !important;
-        cursor: pointer;
-        transform: scale(1.1);
-    }
+    
     body {
         font-size: 1.15rem !important; 
         line-height: 1.7 !important;   
@@ -467,9 +642,68 @@
     input, select, textarea {
         font-size: 1.1rem !important;
     }
-</style>
 
-<!-- 記得把這個接時間的隱藏框框補回來唷！ -->
-<input type="hidden" name="前測時間" id="page_timer">
+    /* 🌟 全新響應式排版 CSS 🌟 */
+    .rating-box {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .rating-labels {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+    }
+
+    /* 🔥 終極手動排版容器，絕對橫向展開 */
+    .rating-options-manual {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    /* 🔥 每一個選項強制上下排列，並且平分空間 */
+    .custom-radio-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 數字標籤 */
+    .custom-radio-num {
+        font-weight: 500;
+        color: #666;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    /* 把圈圈放大，並取消預設邊距 */
+    .custom-radio-btn input[type="radio"] {
+        transform: scale(1.4);
+        margin: 0;
+        cursor: pointer;
+    }
+
+    /* 📱 手機螢幕壓縮微調 */
+    @media (max-width: 576px) {
+        .rating-labels { font-size: 0.8rem; margin-bottom: 10px; }
+        .rating-box { padding: 15px 5px; }
+        .custom-radio-num { font-size: 0.9rem; margin-bottom: 5px; }
+        .custom-radio-btn input[type="radio"] { transform: scale(1.2); }
+    }
+</style>
 
 {{ endblock }}

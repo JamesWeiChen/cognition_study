@@ -5,7 +5,7 @@
 {{ block content }}
 <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #007bff;">
     <h4 style="color: #007bff; margin-bottom: 15px;">論點內容：</h4>
-    <p style="font-size: 1.1em; line-height: 1.6; color: #333;">{{ 論點內容}}</p>
+    <p style="font-size: 1.1em; line-height: 1.6; color: #333;">{{ 論點內容 }}</p>
 </div>
 
 <div style="background-color: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #17a2b8; color: #0c5460; font-size: 1.05em; line-height: 1.6;">
@@ -16,6 +16,10 @@
 
 <div style="margin-top: 10px;">
     {% for field in form %}
+        
+        <!-- 🔥 終極防護罩：只有名字裡有說服力或邏輯性的，才進行排版！跳過計時器！ 🔥 -->
+        {% if '說服力' in field.name or '邏輯性' in field.name %}
+        
         <div style="margin-bottom: 30px;">
             
             <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 1.15rem;">
@@ -26,19 +30,35 @@
                 {% endif %}
             </label>
             
-            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
-                {% if '說服力' in field.name %}
-                    <span style="font-weight: bold; color: #555;">非常沒有說服力</span>
-                    {{ field }}
-                    <span style="font-weight: bold; color: #555;">非常有說服力</span>
-                {% elif '邏輯性' in field.name %}
-                    <span style="font-weight: bold; color: #555;">非常沒有邏輯性</span>
-                    {{ field }}
-                    <span style="font-weight: bold; color: #555;">非常有邏輯性</span>
-                {% endif %}
+            <!-- 🌟 全新升級的響應式評分區塊 -->
+            <div class="rating-box">
+                <!-- 將兩端的文字標籤移到上方，釋放手機的橫向空間 -->
+                <div class="rating-labels">
+                    {% if '說服力' in field.name %}
+                        <span>1 = 非常沒有說服力</span>
+                        <span>9 = 非常有說服力</span>
+                    {% elif '邏輯性' in field.name %}
+                        <span>1 = 非常沒有邏輯性</span>
+                        <span>9 = 非常有邏輯性</span>
+                    {% endif %}
+                </div>
+                
+                <!-- 大絕招：親手把選項一顆一顆抓出來排好 -->
+                <div class="rating-options-manual">
+                    {% for choice in field %}
+                        <label class="custom-radio-item">
+                            <span class="custom-radio-num">{{ choice.label }}</span>
+                            <div class="custom-radio-btn">{{ choice }}</div>
+                        </label>
+                    {% endfor %}
+                </div>
             </div>
+            
             {{ formfield_errors field.name }}
         </div>
+        
+        {% endif %}
+        
     {% endfor %}
 </div>
 
@@ -48,56 +68,81 @@
 </div>
 
 <style>
-    /* 讓水平單選框變成上下排列，且數字在上、圈圈在下 */
-    .form-check-inline {
-        display: inline-flex !important;
-        flex-direction: column-reverse !important; 
-        align-items: center !important;
-        gap: 8px !important; 
-        margin: 0 6px !important;
+    /* 🌟 專屬手機與桌機的完美響應式排版 CSS */
+    .rating-box {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
     }
-    
-    .form-check-label {
+
+    .rating-labels {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+    }
+
+    /* 🔥 終極手動排版容器，絕對橫向展開 */
+    .rating-options-manual {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    /* 🔥 每一個選項強制上下排列，並且平分空間 */
+    .custom-radio-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 數字標籤 */
+    .custom-radio-num {
         font-weight: 500;
-        color: #666 !important;
-        margin-left: 0 !important; 
+        color: #666;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    /* 把圈圈放大，並取消預設邊距 */
+    .custom-radio-btn input[type="radio"] {
+        transform: scale(1.4);
+        margin: 0;
         cursor: pointer;
     }
-    
-    .form-check-input {
-        margin: 0 !important;
-        cursor: pointer;
-        transform: scale(1.1); 
+
+    /* 📱 手機螢幕壓縮微調 */
+    @media (max-width: 576px) {
+        .rating-labels { font-size: 0.8rem; margin-bottom: 10px; }
+        .rating-box { padding: 15px 5px; }
+        .custom-radio-num { font-size: 0.9rem; margin-bottom: 5px; }
+        .custom-radio-btn input[type="radio"] { transform: scale(1.2); }
     }
 </style>
+
 <style>
 /* 1. 放大整個網頁的預設字體與行距 */
-body {
-    font-size: 1.15rem !important; 
-    line-height: 1.7 !important;   
-    color: #333333 !important;     
-}
-
+body { font-size: 1.15rem !important; line-height: 1.7 !important; color: #333333 !important; }
 /* 2. 讓按鈕的字體也跟著長大 */
-.btn {
-    font-size: 1.15rem !important;
-    padding: 10px 20px !important; 
-}
-
+.btn { font-size: 1.15rem !important; padding: 10px 20px !important; }
 /* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
-input, select, textarea {
-    font-size: 1.1rem !important;
-}
-
+input, select, textarea { font-size: 1.1rem !important; }
 /* 4. 微調一下標題的大小，讓版面更有層次 */
-h4, h5, label {
-    line-height: 1.5 !important;
-    margin-bottom: 10px !important;
-    font-size: 1.15rem !important;
-}
+h4, h5, label { line-height: 1.5 !important; margin-bottom: 10px !important; font-size: 1.15rem !important; }
 </style>
-<input type="hidden" name="{{ 計時小抄 }}" id="page_timer">
 
+<input type="hidden" name="{{ 計時小抄 }}" id="page_timer">
 <script>
     let startTime = Date.now(); // 網頁一打開就開始計時
 

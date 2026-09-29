@@ -12,16 +12,21 @@
         <img src="{% static 'candidate_a.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
         <br>
         <input type="radio" name="囤房稅後續選擇" value="{{ 候選人A_稅率 }}" required>
-        支持 候選人A（主張稅率：{{ 候選人A_稅率 }}%）
+        支持 候選人A（主張的囤房稅率：{{ 候選人A_稅率 }}%）
     </label>
 
     <label style="cursor: pointer; text-align: center; padding: 10px; border: 1px solid transparent; border-radius: 5px; transition: 0.3s;">
         <img src="{% static 'candidate_b.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
         <br>
         <input type="radio" name="囤房稅後續選擇" value="{{ 候選人B_稅率 }}" required>
-        支持 候選人B（主張稅率：{{ 候選人B_稅率 }}%）
+        支持 候選人B（主張的囤房稅率：{{ 候選人B_稅率 }}%）
     </label>
 
+</div>
+<div style="margin-top: 40px; background-color: #f8f9fa; padding: 25px; border-radius: 8px;">
+    <label style="font-weight: bold; color: #333; display: block; margin-bottom: 10px;">您選擇這位候選人的理由：</label>
+    {{ form.選擇理由1 }}
+    {{ formfield_errors '選擇理由1' }}
 </div>
 
 <br><br>
