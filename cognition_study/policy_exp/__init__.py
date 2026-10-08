@@ -259,8 +259,13 @@ def get_tax_rates(player):
         稅率一 = player.初始囤房稅 * (1/2)
         稅率二 = player.初始囤房稅 * (5/4)
     else:
-        稅率一 = player.初始囤房稅 * (3/4)
-        稅率二 = player.初始囤房稅 * (3/2)
+        # 🌟 終極穩定解法：用受試者 ID 除以 2 的餘數來決定！
+        if player.id_in_subsession % 2 == 1:
+            稅率一 = player.初始囤房稅 * (3/4)
+            稅率二 = player.初始囤房稅 * (3/2)
+        else:
+            稅率一 = player.初始囤房稅 * (1/2)
+            稅率二 = player.初始囤房稅 * (5/4)
             
     低稅率 = round(min(稅率一, 稅率二), 2)
     高稅率 = round(max(稅率一, 稅率二), 2)
@@ -274,9 +279,14 @@ def get_renewal_rates(player):
         門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.25))
         門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.5))
     else:
-        門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.5))
-        門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.25))
-
+        # 🌟 終極穩定解法：用受試者 ID 除以 2 的餘數來決定！
+        if player.id_in_subsession % 2 == 1:
+            門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.5))
+            門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.25))
+        else:
+            門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.25))
+            門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.5))
+            
     if 門檻二 < 0:
         門檻二 = 0  
     低門檻 = round(min(門檻一, 門檻二), 2)
@@ -291,10 +301,13 @@ def get_credit(player):
         學分一 = player.初始探索學分 * (1/2)
         學分二 = player.初始探索學分 * (5/4)
     else:
-       
-        學分一 = player.初始探索學分 * (3/4)
-        學分二 = player.初始探索學分 * (3/2)
- 
+        # 🌟 終極穩定解法：用受試者 ID 除以 2 的餘數來決定！
+        if player.id_in_subsession % 2 == 1:
+            學分一 = player.初始探索學分 * (3/4)
+            學分二 = player.初始探索學分 * (3/2)
+        else:
+            學分一 = player.初始探索學分 * (1/2)
+            學分二 = player.初始探索學分 * (5/4)
 
     低學分 = int(round(min(學分一, 學分二)))
     高學分 = int(round(max(學分一, 學分二)))
@@ -308,10 +321,14 @@ def get_a_plus_rates(player):
         比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.25))
         比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.5))
     else:
-
-        比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.5))
-        比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.25))
-        
+        # 🌟 終極穩定解法：用受試者 ID 除以 2 的餘數來決定！
+        if player.id_in_subsession % 2 == 1:
+            比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.5))
+            比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.25))
+        else:
+            比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.25))
+            比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.5))
+            
     if 比例一 > 100:
         比例一 = 100
     低比例 = round(min(比例一, 比例二), 2)

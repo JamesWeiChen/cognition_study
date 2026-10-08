@@ -32,8 +32,8 @@ h4, h5, label { line-height: 1.5 !important; margin-bottom: 10px !important; fon
 
 <script>
     // 🌟 1. 抓取 Python 傳來的 A+ 比例，並設定正確答案字串
-    let rateA = parseInt("{{ 候選人A_比例 }}");
-    let rateB = parseInt("{{ 候選人B_比例 }}");
+    let rateA = parseFloat("{{ 候選人A_比例 }}");
+    let rateB = parseFloat("{{ 候選人B_比例 }}");
     let correctOption = `候選人A: ${rateA}%，候選人B: ${rateB}%`;
 
     // 🌟 2. 製作固定的干擾陷阱名單
