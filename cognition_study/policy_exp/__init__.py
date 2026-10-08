@@ -63,10 +63,6 @@ def creating_session(subsession: Subsession):
         random.shuffle(政見列表)
         player.候選人A_景觀法政見 = 政見列表[0]
         player.候選人B_景觀法政見 = 政見列表[1]
-        player.participant.vars['random_tax'] = random.choice([True, False])
-        player.participant.vars['random_renewal'] = random.choice([True, False])
-        player.participant.vars['random_credit'] = random.choice([True, False])
-        player.participant.vars['random_aplus'] = random.choice([True, False])
 
 class Group(BaseGroup):
     pass
@@ -263,8 +259,7 @@ def get_tax_rates(player):
         稅率一 = player.初始囤房稅 * (1/2)
         稅率二 = player.初始囤房稅 * (5/4)
     else:
-        # 🌟 改用隨身包裡的骰子，保證同一位受試者永遠拿到一樣的結果！
-        if player.participant.vars['random_tax']:
+        if random.choice([True, False]):
             稅率一 = player.初始囤房稅 * (3/4)
             稅率二 = player.初始囤房稅 * (3/2)
         else:
@@ -282,9 +277,8 @@ def get_renewal_rates(player):
     elif player.初始景觀同意門檻 > 90:
         門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.25))
         門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.5))
-   else:
-        # 🌟 改用隨身包裡的骰子
-        if player.participant.vars['random_renewal']:
+    else:
+        if random.choice([True, False]):
             門檻一 = player.初始景觀同意門檻 + ((100 - player.初始景觀同意門檻) * (0.5))
             門檻二 = player.初始景觀同意門檻 - ((100 - player.初始景觀同意門檻) * (0.25))
         else:
@@ -304,8 +298,7 @@ def get_credit(player):
         學分一 = player.初始探索學分 * (1/2)
         學分二 = player.初始探索學分 * (5/4)
     else:
-        # 🌟 改用隨身包裡的骰子
-        if player.participant.vars['random_credit']:
+        if random.choice([True, False]):
             學分一 = player.初始探索學分 * (3/4)
             學分二 = player.初始探索學分 * (3/2)
         else:
@@ -324,8 +317,7 @@ def get_a_plus_rates(player):
         比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.25))
         比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.5))
     else:
-        # 🌟 改用隨身包裡的骰子
-        if player.participant.vars['random_aplus']:
+        if random.choice([True, False]):
             比例一 = player.初始A加比例 + ((player.初始A加比例) * (0.5))
             比例二 = player.初始A加比例 - ((player.初始A加比例) * (0.25))
         else:
